@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Cloob"
+  process.env.MONGODB_URI || "mongodb+srv://jacobviv:cloob-password@cluster0.dwspyux.mongodb.net/cloob"
 
 mongoose
   .set('strictQuery', false)

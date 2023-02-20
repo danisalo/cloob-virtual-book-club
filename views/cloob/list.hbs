@@ -19,24 +19,24 @@
                 <tbody>
 
 
-                    {{#each cloob}}
+                    {{#each cloobs}}
 
                     <tr>
 
                         <td>{{name}}</td>
 
                         <td>
-                            <a href="/cloob/{{_id}}" class="btn btn-dark btn-sm">Ver</a>
+                            <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver</a>
                         </td>
-
-                        {{#if ../isHost}}
+                        {{!--
+                        {{#if ../isHost}} --}}
                         <td>
                             <a href="/editar/{{cloob_id}}" class="btn btn-warning btn-sm">Editar</a>
                         </td>
 
-                        {{/if}}
+                        {{!-- {{/if}}
 
-                        {{#if ../isAdmin}}
+                        {{#if ../isAdmin}} --}}
                         <td>
                             <a href="/editar/{{cloob_id}}" class="btn btn-warning btn-sm">Editar</a>
                         </td>
@@ -46,7 +46,7 @@
                                 <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                         </td>
-                        {{/if}}
+                        {{!-- {{/if}} --}}
 
                     </tr>
 

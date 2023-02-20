@@ -1,8 +1,12 @@
 const express = require('express')
 const router = express.Router()
+// Models
 const Cloob = require('./../models/Cloob.model')
+const Event = require('./../models/Event.model')
+const User = require('./../models/User.model')
 
-const { isLoggedIn, checkRole } = require('../middlewares/route-guard')
+// Middlewares
+const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
 ////////////////////////////////////////////
 
@@ -13,7 +17,7 @@ router.get('/lista', isLoggedIn, (req, res, next) => {
         .then(cloobs => {
             res.render('cloob/list', {
                 cloobs: cloobs,
-                isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
+                // isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
                 // isEditor: req.session.currentUser?.role === 'EDITOR',
             })
         })
@@ -50,16 +54,15 @@ router.post('/crear', isLoggedIn, (req, res, next) => {
 
 
 // Render cloob details
-router.get('/cloob/:cloob_id', (req, res, next) => {
+router.get('/detalles/:cloob_id', (req, res, next) => {
 
     const { cloob_id } = req.params
 
     Cloob
         .findById(cloob_id)
-        .then(cloob => res.render(`cloob/${cloob.name}`, cloob))
+        .then(cloob => res.render('cloob/cloob-details', cloob))
         .catch(err => next(err))
 })
-
 
 
 // Edit form render

@@ -18,7 +18,7 @@ module.exports = app => {
                 maxAge: 60000000
             },
             store: MongoStore.create({
-                mongoUrl: process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Cloob"
+                mongoUrl: process.env.MONGODB_URI || "mongodb+srv://jacobviv:cloob-password@cluster0.dwspyux.mongodb.net/cloob"
             })
         })
     )

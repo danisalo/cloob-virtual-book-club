@@ -32,7 +32,6 @@ router.post('/crear-evento-1', /*middleware organizer*/(req, res, next) => {
 
 
 
-
 // Create Event form render #2
 router.get('/crear-evento-2', /*middleware organizer*/(req, res, next) => { res.render('event/create-event') })
 

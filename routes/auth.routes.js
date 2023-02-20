@@ -2,8 +2,13 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 
+// Models
+const Cloob = require('./../models/Cloob.model')
+const Event = require('./../models/Event.model')
 const User = require('./../models/User.model')
-const { isLoggedOut } = require('../middlewares/route-guard')
+
+// Middlewares
+const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
 const saltRounds = 10
 

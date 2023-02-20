@@ -36,6 +36,10 @@ const userSchema = new Schema(
       type: String,
       trim: true
     },
+    friends: [{
+      ref: 'User',
+      type: Schema.Types.ObjectId
+    }],
     role: {
       type: String,
       enum: ['USER', 'HOST', 'ADMIN'],

@@ -22,7 +22,7 @@
 | POST        | /cloob/lista/:genero              | Book Club list -filtered- form handler |      |
 | GET         | /cloob/crear-cloob                     | New Book Club form render              |      |
 | POST        | /cloob/crear                      | New Book Club form handler             |      |
-| GET         | /cloob/:cloob_id                  | Book Club details                      |      |
+| GET         | /cloob/:cloob_id/detalles                  | Book Club details                      |      |
 | GET         | /cloob/:cloob_id/editar           | Edit Book Club form render             |      |
 | POST        | /cloob/:cloob_id/editar           | Edit Book Club form handler            |      |
 | POST        | /cloob/:cloob_id/eliminar         | Delete Book Club                       |      |

@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #1A4C55;
+}
+
+img {
+  width: 100%;
+}
+
+.m-nav {
+  margin-top: 80px;
+}
+
+.bg-cover {
+  background-image: url('/images/Cloob-cover.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.error-msg {
+  background-color: rgb(255, 200, 200);
+  text-align: center;
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 4px;
+}

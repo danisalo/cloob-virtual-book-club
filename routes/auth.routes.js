@@ -17,7 +17,7 @@ router.get('/registro', isLoggedOut, (req, res) => { res.render('auth/signup-for
 
 // Sign-up form handling
 router.post('/registro', (req, res) => {
-    const { firstName, lastName, username, email, avatarURL, userPassword } = req.body
+    const { firstName, lastName, username, email, avatar, userPassword } = req.body
     // if (username) {
     //     res.render('auth/signup-form', { errorMessage: 'Username ya en uso' })
     //     return
@@ -29,8 +29,8 @@ router.post('/registro', (req, res) => {
     bcrypt
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(userPassword, salt))
-        .then(hashPassword => User.create({ firstName, lastName, username, email, avatarURL, userPassword: hashPassword }))
-        .then(() => res.redirect('/'))
+        .then(hashPassword => User.create({ firstName, lastName, username, email, avatar, userPassword: hashPassword }))
+        .then(() => res.redirect('/iniciar-sesion'))
         .catch(err => console.log(err))
 })
 

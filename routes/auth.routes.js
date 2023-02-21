@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const Cloob = require('./../models/Cloob.model')
 const Event = require('./../models/Event.model')
 const User = require('./../models/User.model')
+const uploader = require('../config/uploader.config')
 
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
@@ -16,8 +17,9 @@ const saltRounds = 10
 router.get('/registro', isLoggedOut, (req, res) => { res.render('auth/signup-form') })
 
 // Sign-up form handling
-router.post('/registro', (req, res) => {
-    const { firstName, lastName, username, email, avatar, userPassword } = req.body
+router.post('/registro', uploader.single('avatar'), (req, res) => {
+    const { firstName, lastName, username, email, userPassword } = req.body
+    const { path: avatar } = req.file
     // if (username) {
     //     res.render('auth/signup-form', { errorMessage: 'Username ya en uso' })
     //     return

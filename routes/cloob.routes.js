@@ -5,6 +5,8 @@ const Cloob = require('./../models/Cloob.model')
 const Event = require('./../models/Event.model')
 const User = require('./../models/User.model')
 
+const uploader = require('../config/uploader.config')
+
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
@@ -41,13 +43,13 @@ router.get('/crear', isLoggedIn, (req, res) => {
 
 
 // Create form handling
-router.post('/crear', isLoggedIn, (req, res, next) => {
+router.post('/crear', isLoggedIn, uploader.single('cover'), (req, res, next) => {
 
-    const { name, description, maxParticipants, cover } = req.body
+    const { name, description, maxParticipants } = req.body
     const { _id } = req.session.currentUser                   // CONTENIDO PROPIETARIO: almacenar ID en creación
-
+    const { path: cover } = req.file
     Cloob
-        .create({ name, description, maxParticipants, cover, owner: _id })
+        .create({ name, description, maxParticipants, cover, host: _id })
         .then(cloob => res.redirect('/'))
         .catch(err => next(err))
 })

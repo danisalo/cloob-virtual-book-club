@@ -23,21 +23,22 @@ router.post('/agregar/:cloob_id', isLoggedIn, (req, res, next) => {
 
 // Perfil
 router.get("/mi-perfil", (req, res, next) => {
-    const { user_id } = req.params
+    const { _id: currentUserID } = req.session.currentUser
 
     User
-        .findById(user_id)
+        .findById(currentUserID)
         .populate({
             path: 'myFriends',
-            select: '_id firstName lastName',
             sort: { name: 1 }
         })
         .populate({
             path: 'myCloobs',
-            select: '_id name',
             sort: { name: 1 }
         })
-        .then(user => res.render("user/my-profile", user))
+        .then(currentUser => {
+            console.log("EL BICHO", currentUser)
+            res.render("user/my-profile", currentUser)
+        })
         .catch(err => next(err))
 })
 

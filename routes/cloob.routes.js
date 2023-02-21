@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+
 // Models
 const Cloob = require('./../models/Cloob.model')
 const Event = require('./../models/Event.model')
@@ -10,9 +11,9 @@ const uploader = require('../config/uploader.config')
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
-
+// Routes
+// List Cloobs
 router.get('/lista', isLoggedIn, (req, res, next) => {
-
     Cloob
         .find()
         .populate({
@@ -24,43 +25,50 @@ router.get('/lista', isLoggedIn, (req, res, next) => {
             cloobs: cloobs,
             isAdmin: req.session.currentUser?.role === 'ADMIN',
         }))
-        // isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
-        // isEditor: req.session.currentUser?.role === 'EDITOR',
         .catch(err => next(err))
 })
 
+// Add to My Cloobs
+router.post('/agregar/:cloob_id', isLoggedIn, (req, res, next) => {
+    const { cloob_id } = req.params
+    const user_id = req.session.currentUser?._id
+    User
+        .findByIdAndUpdate(user_id, { $addToSet: { myCloobs: cloob_id } }, { new: true })
+        .then(user => {
+            console.log('este es el user', user)
+            res.redirect('/mi-perfil')
+        })
+        .catch(err => next(err))
+})
 
+// List My Cloobs
 router.get('/mis-cloobs', isLoggedIn, (req, res, next) => {
-
     Cloob
-        .find({ owner: req.session.currentUser._id })             // CONTENIDO PROPIETARIO: filtrar por dueño/a
+        .find({ owner: req.session.currentUser._id })
         .then(cloobs => res.render('cloobs/list', { cloobs }))
         .catch(err => next(err))
 })
 
-
-// Create form render
+// Create Cloob form render
 router.get('/crear', isLoggedIn, (req, res) => {
     res.render('cloob/new-cloob-form')
 })
 
 
-// Create form handling
+// Create Cloob form handling
 router.post('/crear', isLoggedIn, uploader.single('cover'), (req, res, next) => {
-
     const { name, description, maxParticipants } = req.body
-    const { _id } = req.session.currentUser                   // CONTENIDO PROPIETARIO: almacenar ID en creación
+    const { _id } = req.session.currentUser
     const { path: cover } = req.file
+
     Cloob
         .create({ name, description, maxParticipants, cover, host: _id })
         .then(() => res.redirect('/cloob/lista'))
         .catch(err => next(err))
 })
 
-
-// Render cloob details
+// Render Cloob details
 router.get('/detalles/:cloob_id', (req, res, next) => {
-
     const { cloob_id } = req.params
 
     Cloob
@@ -70,9 +78,8 @@ router.get('/detalles/:cloob_id', (req, res, next) => {
 })
 
 
-// Edit form render
-router.get('/editar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'HOST'), (req, res, next) => {    // ROLES: acceso por rol
-
+// Edit Cloob form render
+router.get('/editar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'HOST'), (req, res, next) => {
     const { cloob_id } = req.params
 
     Cloob
@@ -81,10 +88,8 @@ router.get('/editar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'HOST'), (req, re
         .catch(err => next(err))
 })
 
-
-// Edit form handler
-router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res) => {         // ROLES: acceso por rol
-
+// Edit Cloob form handler
+router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res) => {
     const { name, description, maxParticipants, cover, cloob_id } = req.body
 
     Cloob
@@ -93,14 +98,9 @@ router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res) => {
         .catch(err => console.log(err))
 })
 
-
-
-// Delete cloob
+// Delete Cloob
 router.post('/eliminar/:cloob_id', isLoggedIn, (req, res, next) => {
-
     const { cloob_id } = req.params
-
-    console.log(cloob_id)
 
     Cloob
         .findByIdAndDelete(cloob_id)

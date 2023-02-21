@@ -19,19 +19,17 @@
                             <h5 class="card-title">{{name}}</h5>
                             <p class="card-text">{{description}}</p>
                             <hr>
-                            {{#each host}}
-                            <p class="card-text">Organizado por {{firstName}} {{lastName}}</p>
-                            {{/each}}
+                            <p class="card-text">Organizado por {{host.firstName}} {{host.lastName}}</p>
                             <hr>
-                            {{#if isAdmin}}
 
+                            {{#if isAdmin}}
                             <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
                             <form action="/cloob/eliminar/{{_id}}" method="POST">
                                 <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                             {{/if}}
 
-                            <form action="/agregar/{{_id}}" method="POST">
+                            <form action="/cloob/agregar/{{_id}}" method="POST">
                                 <input type="submit" value="Unirse al Cloob" class="btn btn-dark btn-sm">
                             </form>
                         </div>
@@ -57,7 +55,6 @@
                                 <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                             {{/if}}
-                            <a href="#" class="btn btn-primary">Unirse al Cloob</a>
                         </div>
                     </div>
                 </div>

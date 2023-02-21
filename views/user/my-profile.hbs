@@ -1,13 +1,15 @@
 <div class="container">
     <div class="row">
         <h3>Mi perfil - {{currentUser.firstName}} {{currentUser.lastName}}</h3>
-        <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
-            class="profile-picture">
+        <div>
+            <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+                class="profile-picture">
+        </div>
     </div>
-    <div class="row">
-        <h2>Tus amigues</h2>
 
-        {{#each currentUser.amigos}}
+    <div class="row">
+        <h2>Mis amigues</h2>
+        {{!-- {{#each amigos}} --}}
         <div class="card-friend text-center mb-3">
             <div class="card-body">
                 <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
@@ -16,27 +18,14 @@
                 <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
             </div>
         </div>
+        {{!-- {{/each}} --}}
+    </div>
 
-        {{/each}}
+    <div class="row">
+        <h2>Mis Cloobs</h2>
+        {{#each myCloobs}}
+        <p>{{this.name}}</p>
 
-        <div class="card text-center mb-3">
-            <div class="card-body">
-                <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
-                    class="profile-picture">
-                <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-                <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
-            </div>
-        </div>
-        <div class="card text-center mb-3">
-            <div class="card-body">
-                <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
-                    class="profile-picture">
-                <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-                <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
-            </div>
-        </div>
-
-        {{!-- {{#each currentUser.cloobs}} --}}
         <div class="card-cloob">
             <img src="{{cover}}" class="card-img-top" alt="{{name}}">
             <div class="card-body">
@@ -45,7 +34,6 @@
                 <a href="/cloob//detalles/{{cloob_id}}" class="btn btn-primary">Ver detalles</a>
             </div>
         </div>
-        {{!-- {{/each}} --}}
-
+        {{/each}}
     </div>
 </div>

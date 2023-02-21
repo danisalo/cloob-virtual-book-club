@@ -2,9 +2,22 @@
     <h1>Mi perfil</h1>
     <div class="row">
         <h2>{{currentUser.firstName}}</h2>
-        <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}">
+        <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+            class="profile-picture">
 
+        <h2>Tus amigues</h2>
 
+        {{!-- {{#each currentUser.amigos}} --}}
+        <div class="card text-center mb-3">
+            <div class="card-body">
+                <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+                    class="profile-picture">
+                <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+            </div>
+        </div>
+
+        {{!-- {{/each}} --}}
 
 
     </div>

@@ -10,16 +10,6 @@ img {
   width: 100%;
 }
 
-.m-nav {
-  margin-top: 80px;
-}
-
-.bg-cover {
-  background-image: url('/images/Cloob-cover.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .error-msg {
   background-color: rgb(255, 200, 200);
   text-align: center;
@@ -37,6 +27,44 @@ img {
   color: #F5F7B6;
 }
 
-.cloobs {
+.m-nav {
+  margin-top: 80px;
+}
+
+.bg-cover {
+  background-image: url('/images/Cloob-cover.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.profile-picture {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.card-friend {
+  width: 12rem;
+  color: black;
+}
+
+.card-cloob {
+  width: 18rem;
+  color: black;
+}
+
+
+
+/* Type System */
+
+h4 {
+  font-weight: 600;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
   color: black;
 }

@@ -36,8 +36,12 @@ const userSchema = new Schema(
       type: String,
       trim: true
     },
-    friends: [{
+    myFriends: [{
       ref: 'User',
+      type: Schema.Types.ObjectId
+    }],
+    myCloobs: [{
+      ref: 'Cloob',
       type: Schema.Types.ObjectId
     }],
     role: {

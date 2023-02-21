@@ -19,7 +19,7 @@ router.get('/lista', isLoggedIn, (req, res, next) => {
         .then(cloobs => {
             res.render('cloob/list', {
                 cloobs: cloobs,
-                // isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
+                isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
                 // isEditor: req.session.currentUser?.role === 'EDITOR',
             })
         })

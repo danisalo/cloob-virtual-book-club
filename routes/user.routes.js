@@ -9,18 +9,6 @@ const User = require('./../models/User.model')
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
-
-//Agregar Cloobs
-router.post('/agregar/:cloob_id', isLoggedIn, (req, res, next) => {
-    const { cloob_id } = req.params
-    const user_id = req.session.currentUser?._id
-    User
-        .findByIdAndUpdate(user_id, { $addToSet: { myCloobs: cloob_id } })
-        .then(() => res.redirect('/user/my-profile'))
-        .catch(err => next(err))
-})
-
-
 // Perfil
 router.get("/mi-perfil", (req, res, next) => {
     const { _id: currentUserID } = req.session.currentUser

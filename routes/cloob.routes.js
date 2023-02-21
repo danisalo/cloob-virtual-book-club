@@ -35,7 +35,6 @@ router.post('/agregar/:cloob_id', isLoggedIn, (req, res, next) => {
     User
         .findByIdAndUpdate(user_id, { $addToSet: { myCloobs: cloob_id } }, { new: true })
         .then(user => {
-            console.log('este es el user', user)
             res.redirect('/mi-perfil')
         })
         .catch(err => next(err))

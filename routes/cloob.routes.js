@@ -10,19 +10,22 @@ const uploader = require('../config/uploader.config')
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
-////////////////////////////////////////////
 
 router.get('/lista', isLoggedIn, (req, res, next) => {
 
     Cloob
         .find()
-        .then(cloobs => {
-            res.render('cloob/list', {
-                cloobs: cloobs,
-                // isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
-                // isEditor: req.session.currentUser?.role === 'EDITOR',
-            })
+        .populate({
+            path: 'host',
+            select: '_id firstName lastName'
         })
+        .sort({ name: 1 })
+        .then(cloobs => res.render('cloob/list', {
+            cloobs: cloobs,
+            isAdmin: req.session.currentUser?.role === 'ADMIN',
+        }))
+        // isAdmin: req.session.currentUser?.role === 'ADMIN',       // ROLES: contenido renderizado por rol
+        // isEditor: req.session.currentUser?.role === 'EDITOR',
         .catch(err => next(err))
 })
 
@@ -50,7 +53,7 @@ router.post('/crear', isLoggedIn, uploader.single('cover'), (req, res, next) => 
     const { path: cover } = req.file
     Cloob
         .create({ name, description, maxParticipants, cover, host: _id })
-        .then(cloob => res.redirect('/'))
+        .then(() => res.redirect('/cloob/lista'))
         .catch(err => next(err))
 })
 
@@ -93,13 +96,17 @@ router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res) => {
 
 
 // Delete cloob
-router.post('/eliminar/:cloob_id', isLoggedIn, checkRole('ADMIN'), (req, res, next) => {          // ROLES: acceso por rol
+router.post('/eliminar/:cloob_id', isLoggedIn, (req, res, next) => {
 
     const { cloob_id } = req.params
 
+    console.log(cloob_id)
+
     Cloob
         .findByIdAndDelete(cloob_id)
-        .then(() => res.redirect('/cloob/lista'))
+        .then(() => {
+            res.redirect('/cloob/lista')
+        })
         .catch(err => next(err))
 })
 

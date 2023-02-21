@@ -22,16 +22,14 @@
                             <p class="card-text">Organizado por {{host.firstName}} {{host.lastName}}</p>
                             <hr>
 
-                            {{#if isAdmin}}
-                            <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
+                            {{#if ...isAdmin}}
                             <form action="/cloob/eliminar/{{_id}}" method="POST">
                                 <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                             {{/if}}
 
-                            <form action="/cloob/agregar/{{_id}}" method="POST">
-                                <input type="submit" value="Unirse al Cloob" class="btn btn-dark btn-sm">
-                            </form>
+                            <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
+
                         </div>
                     </div>
 
@@ -41,20 +39,21 @@
 
             </div>
 
+            <hr>
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 cloobs" style="width: 18rem;">
-                        <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                        <img class="card-img-top"
+                            src="https://res.cloudinary.com/dle7ctrmn/image/upload/v1676993838/dn8a0drueeclckzhzchr.png"
+                            alt="Imagen del Cloob {{name}}">
                         <div class="card-body">
                             <h5 class="card-title">CREA UN NUEVO CLUB</h5>
-                            <p class="card-text">{{description}}</p>
                             <hr>
-                            <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
-                            {{#if isAdmin}}
-                            <form action="/cloob/eliminar/{{_id}}" method="POST">
-                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
-                            </form>
-                            {{/if}}
+                            <p>Conviértete en responsable de un club de lectura.</p>
+
+                            <hr>
+                            <a href="/cloob/crear" class="btn btn-warning btn-sm">Crear Cloob</a>
                         </div>
                     </div>
                 </div>

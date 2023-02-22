@@ -8,7 +8,10 @@ const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewa
 
 router.get("/", (req, res, next) => {
 
-  const promises = [Cloob.find(), Cloob.find()]
+  const promises = [
+    Cloob.find().populate('host', '_id firstName lastName'),
+    Cloob.find().populate('host', '_id firstName lastName')
+  ]
 
   Promise
     .all(promises)
@@ -25,26 +28,6 @@ router.get("/", (req, res, next) => {
       })
     })
     .catch(err => next(err))
-
-  // Cloob
-  //   .find()
-  //   .populate({
-  //     path: 'host',
-  //     select: '_id firstName lastName'
-  //   })
-  //   // .limit(4)
-  //   // .then(allCloobs => {
-  //   //   return popularCloobs = allCloobs.sort((a, b) => b.participants.length - a.participants.length)
-  //   // })
-  //   .then(allCloobs => {
-  //     recentCloobs = allCloobs.sort((a, b) => b.createdAt - a.createdAt)
-  //   })
-  //   .then(() => res.render('index', {
-  //     recentCloobs,
-  //     // popularCloobs,
-  //     isAdmin: req.session.currentUser?.role === 'ADMIN'
-  //   }))
-  //   .catch(err => next(err))
 
 })
 

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h2>Crear nuevo evento</h2>
+        <hr>
+        <h3>Seleccionar libro</h3>
+        <hr>
+        <div class="row">
+            {{#each books }}
+            <div class="card cloobs col-md-3 m-2 mb-4">
+                <form action="/evento/seleccionar-libro/{{id}}" method="POST">
+                    <img src="{{volumeInfo.imageLinks.smallThumbnail}}" alt="{{volumeInfo.title}}">
+                    <p>{{volumeInfo.title}}</p>
+                    <p>{{volumeInfo.authors}}</p>
+                    <button type="submit" class="btn btn-dark">Seleccionar</button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -16,6 +16,10 @@ module.exports = app => {
     const eventRoutes = require("./event.routes")
     app.use("/evento", eventRoutes)
 
+    // Comments
+    const commentRoutes = require("./comment.routes")
+    app.use("/", commentRoutes)
+
     // User
     const userRoutes = require("./user.routes")
     app.use("/", userRoutes)

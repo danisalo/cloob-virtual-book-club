@@ -8,7 +8,7 @@ class ApiServiceBooks {
     }
 
     searchBooks(query) {
-        return this.api.get(`/volumes?q=${query}`)
+        return this.api.get(`/volumes?q=${query}`).then(({ data }) => data)
     }
 }
 

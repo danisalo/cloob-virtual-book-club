@@ -5,32 +5,53 @@ const router = express.Router()
 const Cloob = require('./../models/Cloob.model')
 const Event = require('./../models/Event.model')
 const User = require('./../models/User.model')
+const Comment = require('./../models/Comment.model')
+const uploader = require('../config/uploader.config')
+
+// API
+const ApiServiceBooks = require('../services/books.service')
+const eventApi = new ApiServiceBooks()
 
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
-// Create Event form render #1
-router.get('/crear-evento-1', /*middleware organizer*/(req, res, next) => { res.render('event/create-event-1') })
+// Buscador
+router.get('/buscar-libro', (req, res, next) => {
+    res.render('event/search-book')
+})
 
-// Create Event form handler #1
-router.post('/crear-evento-1', /*middleware organizer*/(req, res, next) => {
+// Selector form render
+router.get('/seleccionar-libro', (req, res, next) => {
 
-    const { searchBook } = req.body
-    // const { currentUser_id } = req.session.currentUser
+    const searchBook = req.query.search
 
-    Event
+    eventApi
         .searchBooks(searchBook)
-        // .create({ searchBook, owner: currentUser_id })
-        .then(() => res.redirect(`/cloob/${cloob._id}`))
+        .then((data) => {
+            const books = data.items
+            res.render(`event/select-book`, { books })
+        })
         .catch(err => next(err))
 })
 
-// Create Event form render #2
-router.get('/crear-evento-2', /*middleware organizer*/(req, res, next) => { res.render('event/create-event') })
+
+// Selector form handler
+router.post('/seleccionar-libro/:book_id', (req, res, next) => {
+    const { book_id } = req.params
+    res.render('event/create-event', { book_id })
+})
 
 
-// Create Event form handler #2
-router.post('/crear-evento-2', /*middleware organizer*/(req, res, next) => {
+// Create Event form render
+router.get('/crear-evento', (req, res, next) => {
+    const { book_id } = req.params
+    res.render('event/create-event', { book_id })
+})
+
+
+
+// Create Event form handler
+router.post('/crear-evento', /*middleware organizer*/(req, res, next) => {
 
     const { date, participants } = req.body
     const { _id: owner } = req.session.currentUser
@@ -40,6 +61,5 @@ router.post('/crear-evento-2', /*middleware organizer*/(req, res, next) => {
         .then(() => res.redirect(`/cloob/${cloob._id}`))
         .catch(err => next(err))
 })
-
 
 module.exports = router

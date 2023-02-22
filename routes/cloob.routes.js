@@ -5,7 +5,7 @@ const router = express.Router()
 const Cloob = require('./../models/Cloob.model')
 const Event = require('./../models/Event.model')
 const User = require('./../models/User.model')
-
+const Comment = require('./../models/Comment.model')
 const uploader = require('../config/uploader.config')
 
 // Middlewares

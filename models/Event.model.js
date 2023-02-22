@@ -14,6 +14,10 @@ const eventSchema = new Schema(
         participants: [{
             ref: 'User',
             type: Schema.Types.ObjectId
+        }],
+        comments: [{
+            ref: 'Comment',
+            type: Schema.Types.ObjectId
         }]
     },
     {

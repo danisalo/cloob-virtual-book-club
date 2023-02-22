@@ -11,7 +11,6 @@ const uploader = require('../config/uploader.config')
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
-// Routes
 // List Cloobs
 router.get('/lista', isLoggedIn, (req, res, next) => {
 
@@ -35,20 +34,15 @@ router.post('/agregar/:cloob_id', isLoggedIn, (req, res, next) => {
 
     const { cloob_id } = req.params
     const user_id = req.session.currentUser?._id
+
     Cloob
         .findByIdAndUpdate(cloob_id, { $addToSet: { participants: user_id } }, { new: true })
         .then(() => {
-            res.redirect('/cloob/lista')
+            return User
+                .findByIdAndUpdate(user_id, { $addToSet: { myCloobs: cloob_id } }, { new: true })
         })
-    // User
-    //     .findByIdAndUpdate(user_id, { $addToSet: { myCloobs: cloob_id } }, { new: true })
-    //     .then(() => {
-    //         Cloob
-    //             .findByIdAndUpdate(cloob_id, { $addToSet: { participants: user_id } }, { new: true })
-
-    //         res.redirect('/mi-perfil')
-    //     })
-    //     .catch(err => next(err))
+        .then(() => res.redirect("back"))
+        .catch(err => next(err))
 })
 
 
@@ -85,14 +79,22 @@ router.post('/crear', isLoggedIn, uploader.single('cover'), (req, res, next) => 
 })
 
 // Details Cloob
-router.get('/detalles/:cloob_id', (req, res, next) => {
+router.get('/detalles/:cloob_id', isLoggedIn, (req, res, next) => {
 
     const { cloob_id } = req.params
 
     Cloob
         .findById(cloob_id)
-        .populate('participants')
-        .then(cloob => res.render('cloob/cloob-details', cloob))
+        .populate({
+            path: 'participants'
+        })
+        .populate({
+            path: 'host'
+        })
+        .then(cloob => res.render('cloob/cloob-details', { // ESTO ESTA ROMPIENDO TODO
+            cloob,
+            isAdmin: req.session.currentUser?.role === 'ADMIN',
+        }))
         .catch(err => next(err))
 })
 

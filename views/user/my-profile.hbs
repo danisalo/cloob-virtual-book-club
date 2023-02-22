@@ -9,29 +9,26 @@
 
     <div class="row">
         <h2>Mis amigues</h2>
-        {{!-- {{#each amigos}} --}}
+        {{#each myFriends}}
         <div class="card-friend text-center mb-3">
             <div class="card-body">
-                <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
-                    class="profile-picture">
-                <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-                <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
+                <h4>{{firstName}} {{lastName}}</h4>
+                <a href="/perfil/{{_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
             </div>
         </div>
-        {{!-- {{/each}} --}}
+        {{/each}}
     </div>
 
     <div class="row">
         <h2>Mis Cloobs</h2>
         {{#each myCloobs}}
-        <p>{{this.name}}</p>
-
         <div class="card-cloob">
             <img src="{{cover}}" class="card-img-top" alt="{{name}}">
             <div class="card-body">
                 <h5 class="card-title">{{name}}</h5>
                 <p class="card-text">{{description}}</p>
-                <a href="/cloob//detalles/{{cloob_id}}" class="btn btn-primary">Ver detalles</a>
+                <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
             </div>
         </div>
         {{/each}}

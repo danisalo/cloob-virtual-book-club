@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #1A4C55;
   color: #F5F7B6;
 }
@@ -31,12 +31,6 @@ img {
   margin-top: 80px;
 }
 
-.bg-cover {
-  background-image: url('/images/Cloob-cover.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .profile-picture {
   display: inline-block;
   width: 120px;
@@ -62,12 +56,51 @@ img {
   color: black;
 }
 
+.logo {
+  font-family: Gloock;
+}
 
-/* Type System */
+h1,
+h2,
+h3,
+h5 {
+  font-family: Gloock;
+}
 
-h4 {
-  font-weight: 600;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  color: black;
+h1 {
+  font-size: 10em;
+  margin-top: .5em;
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  letter-spacing: .04em;
+}
+
+h3 {
+  font-size: 5em;
+}
+
+h5 {
+  letter-spacing: .04em;
+}
+
+.cover-img {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.btn-cloob {
+  margin-top: 1em;
+  padding: .5em 4em;
+  background-color: #F5F7B6;
+  color: #1A4C55;
+}
+
+.btn-cloob:hover {
+  background-color: #cf502d;
+  color: #F5F7B6;
+  ;
 }

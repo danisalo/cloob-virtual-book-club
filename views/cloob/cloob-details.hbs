@@ -1,29 +1,28 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <h2>{{name}}</h2>
-            <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
-            <form action="/cloob/agregar/{{_id}}" method="POST">
+            <h2>{{cloob.name}}</h2>
+            <img class="card-img-top" src="{{cloob.cover}}" alt="Imagen del Cloob {{cloob.name}}">
+            <form action="/cloob/agregar/{{cloob._id}}" method="POST">
                 <input type="submit" value="Unirse" class="btn btn-dark btn-sm">
             </form>
         </div>
 
         <div class="col-8">
-            <h2>Moderado por:</h2>
+            <h2>Moderado por: {{cloob.host.firstName}} {{cloob.host.lastName}}</h2>
             <div class="row">
                 <div class="col-4">
                     <div class="card-friend text-center mb-3">
                         <div class="card-body">
-                            <img src="{{currentUser.avatar}}"
-                                alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+                            <img src="{{cloob.host.avatar}}"
+                                alt="Avatar de {{cloob.host.firstName}} {{cloob.host.lastName}}"
                                 class="profile-picture">
-                            <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-                            <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                            <a href="/perfil/{{cloob.host._id}}" class="btn btn-dark btn-sm">Ver perfil</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-8">
-                    <p>{{description}}</p>
+                    <p>{{cloob.description}}</p>
                 </div>
             </div>
         </div>
@@ -33,14 +32,12 @@
     <div>
         <div class="row">
             <h2>Integrantes</h2>
-            {{#each participants}}
+            {{#each cloob.participants}}
             <div class="card-friend text-center mb-3">
                 <div class="card-body">
-                    <p>{{firstName}}</p>
-
                     <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
                     <h4>{{firstName}} {{lastName}}</h4>
-                    <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                    <a href="/perfil/{{_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
                 </div>
             </div>
             {{/each}}
@@ -49,13 +46,36 @@
     </div>
     <br>
     <br>
+    <div>
+        <div class="row">
+            <h2>Eventos</h2>
+            {{!-- {{#each cloob.events}} --}}
+            <div class="card mb-4 cloobs" style="width: 18rem;">
+                <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                <div class="card-body">
+                    <h5 class="card-title">Book name</h5>
+                    <p class="card-text">Date of event</p>
+                    <hr>
+                    <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver evento</a>
+                    <p class="card-text">Num participants</p>
+                    {{#if ...isAdmin}}
+                    <form action="/cloob/eliminar/{{_id}}" method="POST">
+                        <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                    </form>
+                    {{/if}}
+
+                </div>
+            </div>
+            {{!-- {{/each}} --}}
+
+        </div>
+    </div>
+
     <div class="row">
+        {{#if isAdmin}}
         <a href="/evento/crear-evento-1" class="btn btn-warning btn-sm">Crear Evento</a>
 
         <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
-
-        <form action="/cloob/agregar/{{_id}}" method="POST">
-            <input type="submit" value="Unirse al Cloob" class="btn btn-dark btn-sm">
-        </form>
+        {{/if}}
     </div>
 </div>

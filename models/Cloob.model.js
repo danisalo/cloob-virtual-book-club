@@ -23,7 +23,8 @@ const cloobSchema = new Schema(
         }],
         cover: {
             type: String,
-            trim: true
+            trim: true,
+            // default: 'https://res.cloudinary.com/dle7ctrmn/image/upload/v1677081076/default-cloob_xxhtla.png'
         },
         host: {
             ref: 'User',

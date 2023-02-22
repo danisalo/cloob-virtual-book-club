@@ -14,6 +14,7 @@ router.get('/crear-evento-1', /*middleware organizer*/(req, res, next) => { res.
 
 // Create Event form handler #1
 router.post('/crear-evento-1', /*middleware organizer*/(req, res, next) => {
+
     const { searchBook } = req.body
     // const { currentUser_id } = req.session.currentUser
 
@@ -24,30 +25,21 @@ router.post('/crear-evento-1', /*middleware organizer*/(req, res, next) => {
         .catch(err => next(err))
 })
 
-
-
-
-
-
-
-
-
 // Create Event form render #2
 router.get('/crear-evento-2', /*middleware organizer*/(req, res, next) => { res.render('event/create-event') })
 
+
 // Create Event form handler #2
 router.post('/crear-evento-2', /*middleware organizer*/(req, res, next) => {
+
     const { date, participants } = req.body
-    const { currentUser_id } = req.session.currentUser
+    const { _id: owner } = req.session.currentUser
 
     Event
-        .create({ date, participants, owner: currentUser_id })
+        .create({ date, participants, owner })
         .then(() => res.redirect(`/cloob/${cloob._id}`))
         .catch(err => next(err))
 })
-
-
-
 
 
 module.exports = router

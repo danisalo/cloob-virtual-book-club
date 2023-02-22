@@ -11,6 +11,7 @@ const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewa
 
 // Perfil
 router.get("/mi-perfil", (req, res, next) => {
+
     const { _id: currentUserID } = req.session.currentUser
 
     User

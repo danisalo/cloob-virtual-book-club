@@ -18,6 +18,7 @@ router.get('/registro', isLoggedOut, (req, res) => { res.render('auth/signup-for
 
 // Sign-up form handling
 router.post('/registro', uploader.single('avatar'), (req, res) => {
+
     const { firstName, lastName, username, email, userPassword } = req.body
     const { path: avatar } = req.file
     // if (username) {
@@ -41,6 +42,7 @@ router.get('/iniciar-sesion', isLoggedOut, (req, res) => { res.render('auth/logi
 
 // Log-in form handler
 router.post('/iniciar-sesion', (req, res) => {
+
     const { email, userPassword } = req.body
 
     if (email.length === 0 || userPassword.length === 0) {

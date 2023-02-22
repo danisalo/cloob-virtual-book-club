@@ -7,7 +7,7 @@ class ApiServiceBooks {
         })
     }
     searchBooks(query) {
-        return this.api.get(`${query}`).then(response => response.data.items)
+        return this.api.get(`${query}`)
     }
 }
 

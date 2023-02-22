@@ -1,10 +1,61 @@
 <div class="container">
-    <h1>Detalles del Cloob</h1>
-    <a href="/evento/crear-evento-1" class="btn btn-warning btn-sm">Crear Cloob</a>
+    <div class="row">
+        <div class="col-4">
+            <h2>{{name}}</h2>
+            <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+            <form action="/cloob/agregar/{{_id}}" method="POST">
+                <input type="submit" value="Unirse" class="btn btn-dark btn-sm">
+            </form>
+        </div>
 
-    <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
+        <div class="col-8">
+            <h2>Moderado por:</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card-friend text-center mb-3">
+                        <div class="card-body">
+                            <img src="{{currentUser.avatar}}"
+                                alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+                                class="profile-picture">
+                            <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                            <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p>{{description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div>
+        <div class="row">
+            <h2>Integrantes</h2>
+            {{#each participants}}
+            <div class="card-friend text-center mb-3">
+                <div class="card-body">
+                    <p>{{firstName}}</p>
 
-    <form action="/cloob/agregar/{{_id}}" method="POST">
-        <input type="submit" value="Unirse al Cloob" class="btn btn-dark btn-sm">
-    </form>
+                    <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
+                    <h4>{{firstName}} {{lastName}}</h4>
+                    <a href="/perfil/{{user_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <a href="/evento/crear-evento-1" class="btn btn-warning btn-sm">Crear Evento</a>
+
+        <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
+
+        <form action="/cloob/agregar/{{_id}}" method="POST">
+            <input type="submit" value="Unirse al Cloob" class="btn btn-dark btn-sm">
+        </form>
+    </div>
 </div>

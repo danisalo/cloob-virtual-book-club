@@ -72,7 +72,7 @@ router.post('/:cloob_id/crear-evento', (req, res, next) => {
 })
 
 
-router.get('/:cloob_id/detalles/:event_id', isLoggedIn, (req, res, next) => {
+router.get('/detalles/:event_id', isLoggedIn, (req, res, next) => {
 
     const { cloob_id } = req.params
     const { event_id } = req.params

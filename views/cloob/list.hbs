@@ -1,47 +1,33 @@
 <div class="container">
-
     <div class="row justify-content-center">
-
-        <div class="col-md-8">
-
+        <div class="col-8">
             <h3>cloobs.</h3>
             <h2>Todos los clubs de lectura a un click de distancia.</h2>
             <hr>
-
             <div class="row">
-
                 {{#each cloobs}}
-
-                <div class="col-md-4">
-
+                <div class="col-4">
                     <div class="card mb-4 cloobs card-cloob" style="width: 18rem;">
                         <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
                         <div class="card-body">
                             <h5 class="card-title">{{name}}</h5>
                             <p class="card-text five-lines">{{description}}</p>
                             <hr>
-                            <p class="card-text">Organizado por {{host.firstName}} {{host.lastName}}</p>
+                            <p class="card-text"><b>host:</b> {{host.firstName}} {{host.lastName}}</p>
                             <hr>
-
+                            <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
                             {{#if ...isAdmin}}
                             <form action="/cloob/eliminar/{{_id}}" method="POST">
                                 <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                             {{/if}}
-
-                            <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
-
                         </div>
                     </div>
-
                 </div>
-
                 {{/each}}
 
             </div>
-
             <hr>
-
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 cloobs" style="width: 18rem;">
@@ -52,13 +38,11 @@
                             <h5 class="card-title">CREA UN NUEVO CLUB</h5>
                             <hr>
                             <p>Conviértete en responsable de un club de lectura.</p>
-
                             <hr>
                             <a href="/cloob/crear" class="btn btn-warning btn-sm">Crear Cloob</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

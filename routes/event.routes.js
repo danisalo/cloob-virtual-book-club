@@ -71,27 +71,27 @@ router.post('/:cloob_id/crear-evento', (req, res, next) => {
         .catch(err => next(err))
 })
 
-
+// Details
 router.get('/detalles/:event_id', isLoggedIn, (req, res, next) => {
 
-    const { cloob_id } = req.params
+    // const { cloob_id } = req.params
     const { event_id } = req.params
 
     Event
         .findById(event_id)
         .populate({
-            path: 'participants'
+            path: 'participants bookId'
         })
-        .populate({
-            path: 'host'
+        .then(event => {
+            bookApi.getBookById(event.bookId)
+                .then(book => res.render('event/event-details', {
+                    book,
+                    event,
+                    isAdmin: req.session.currentUser?.role === 'ADMIN'
+                }))
+                .catch(err => next(err))
         })
-        .populate({
-            path: 'events'
-        })
-        .then(event => res.render('event/event-details', {
-            event,
-            isAdmin: req.session.currentUser?.role === 'ADMIN'
-        }))
+
         .catch(err => next(err))
 })
 

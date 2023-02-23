@@ -86,13 +86,7 @@ router.get('/detalles/:cloob_id', isLoggedIn, (req, res, next) => {
     Cloob
         .findById(cloob_id)
         .populate({
-            path: 'participants'
-        })
-        .populate({
-            path: 'host'
-        })
-        .populate({
-            path: 'events'
+            path: 'participants host events'
         })
         .then(cloob => res.render('cloob/cloob-details', {
             cloob,

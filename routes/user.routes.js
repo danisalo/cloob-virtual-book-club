@@ -73,7 +73,7 @@ router.get('/user/editar', (req, res, next) => {
 
     User
         .findById(currentUserID)
-        .then(user => res.render('user/edit-user-form', user))
+        .then(currentUser => res.render('user/edit-user-form', currentUser))
         .catch(err => next(err))
 })
 
@@ -81,13 +81,16 @@ router.get('/user/editar', (req, res, next) => {
 // Edit User form handler
 router.post('/user/editar', uploader.single('avatar'), (req, res, next) => {
 
-    const { firstName, lastName, username, email, user_id } = req.body
+    const { firstName, lastName, username, email } = req.body
     const { path: avatar } = req.file
-    // const { _id: currentUserID } = req.session.currentUser
+    const { _id: currentUserID } = req.session.currentUser
 
     User
-        .findByIdAndUpdate(user_id, { firstName, lastName, username, email, avatar })
-        .then(() => res.redirect("/mi-perfil"))
+        .findByIdAndUpdate(currentUserID, { firstName, lastName, username, email, avatar }, { new: true })
+        .then(updatedUser => {
+            req.session.currentUser = updatedUser
+            res.redirect('/mi-perfil')
+        })
         .catch(err => next(err))
 })
 

@@ -1,15 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <h2>{{event.bookId}}</h2>
-            <img class="card-img-top" src="{{cloob.cover}}" alt="Imagen del Cloob {{event.name}}">
-            <form action="/cloob/agregar/{{cloob._id}}" method="POST">
-                <input type="submit" value="Unirse" class="btn btn-dark btn-sm">
-            </form>
+            <p><b>Date:</b> {{event.date}}</p>
+            {{!-- <img class="card-img-top" src="{{book.}}" alt="Imagen del Cloob {{event.name}}"> --}}
+            <div class="card cloobs col-8 col-md-3 m-2 mb-4">
+                <img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}">
+                <p>{{book.volumeInfo.title}}</p>
+                <p>{{book.volumeInfo.authors}}</p>
+            </div>
         </div>
 
         <div class="col-8">
-            <h2>Moderado por: {{cloob.host.firstName}} {{cloob.host.lastName}}</h2>
+            <h4>Moderado por: {{cloob.host.firstName}} {{cloob.host.lastName}}</h4>
             <div class="row">
                 <div class="col-4">
                     <div class="card-friend text-center mb-3">
@@ -31,7 +33,7 @@
     <br>
     <div>
         <div class="row">
-            <h2>Integrantes</h2>
+            <h4>Integrantes</h4>
             {{#each cloob.participants}}
             <div class="card-friend text-center mb-3">
                 <div class="card-body">
@@ -48,7 +50,7 @@
     <br>
     <div>
         <div class="row">
-            <h2>Eventos</h2>
+            <h4>Eventos</h4>
             {{#each cloob.events}}
             <div class="card mb-4 cloobs" style="width: 18rem;">
                 <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">

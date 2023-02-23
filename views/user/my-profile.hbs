@@ -15,15 +15,12 @@
             <h3>Siguiendo</h3>
         </div>
         {{#each myFriends}}
-        {{!-- <div class="col-8"> --}}
-            <div class="card mb-2 card-friend text-center me-2 five-lines">
-                <div class="card-body">
-                    <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
-                    <h4>{{firstName}} {{lastName}}</h4>
-                    <a href="/perfil/{{_id}}" class="btn btn-cloob2 btn-sm">Ver perfil</a>
-                </div>
-                {{!--
-            </div> --}}
+        <div class="card mb-2 card-friend text-center me-2">
+            <div class="card-body">
+                <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
+                <h4 class="card-friend">{{firstName}} {{lastName}}</h4>
+                <a href="/perfil/{{_id}}" class="btn btn-cloob2 btn-sm">Ver perfil</a>
+            </div>
         </div>
         {{/each}}
     </div>
@@ -34,13 +31,13 @@
         </div>
         {{#each myCloobs}}
         <div class="col-3">
-            <div class="card mb-2 card-cloob five-lines">
+            <div class="card mb-2 card-cloob">
                 <div class="ratio ratio-1x1">
                     <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">{{name}}</h4>
-                    <p class="card-text">{{description}}</p>
+                    <p class="card-text five-lines">{{description}}</p>
                     <div class="d-grid">
                         {{#if ...isAdmin}}
                         <form action="/cloob/eliminar/{{_id}}" method="POST">

@@ -36,6 +36,7 @@ router.get("/mi-perfil", (req, res, next) => {
 router.get("/perfil/:user_id", (req, res, next) => {
 
     const { user_id } = req.params
+
     User
         .findById(user_id)
         .populate({
@@ -52,6 +53,7 @@ router.get("/perfil/:user_id", (req, res, next) => {
         .catch(err => next(err))
 })
 
+
 // Add to My Friends
 router.post('/agregar/:user_id', isLoggedIn, (req, res, next) => {
 
@@ -62,6 +64,30 @@ router.post('/agregar/:user_id', isLoggedIn, (req, res, next) => {
         .findByIdAndUpdate(currentUser_id, { $addToSet: { myFriends: user_id } }, { new: true })
         .then(() => res.redirect("back"))
         .catch(err => next(err))
+})
+
+// Edit User form render
+router.get('/user/editar', (req, res, next) => {
+
+    const { _id: currentUserID } = req.session.currentUser
+
+    User
+        .findById(currentUserID)
+        .then(user => res.render('user/edit-user-form', user))
+        .catch(err => next(err))
+})
+
+
+// Edit User form handler
+router.post('/user/editar', (req, res) => {
+
+    const { firstName, lastName, username, email, user_id } = req.body
+    const { path: avatar } = req.file
+
+    User
+        .findByIdAndUpdate(user_id, { firstName, lastName, username, email, avatar })
+        .then(() => res.redirect('/mi-perfil'))
+        .catch(err => console.log(err))
 })
 
 

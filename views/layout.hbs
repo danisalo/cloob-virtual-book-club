@@ -14,7 +14,7 @@
 </head>
 
 <body>
-   <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+   <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary px-4" data-bs-theme="dark">
       <div class="container-fluid">
          <a class="navbar-brand logo" href="/">cloob.</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -26,23 +26,21 @@
                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
                <li class="nav-item"><a class="nav-link" href="/cloob/lista">Ver cloobs</a></li>
                {{#if currentUser}}
-               <li class="nav-item"><a class="nav-link" href="/cloob/crear">Crea un cloob</a></li>
+               <li class="nav-item"><a class="nav-link" href="/cloob/crear">Crear cloob</a></li>
                {{/if}}
             </ul>
             <div class="d-flex">
                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  {{!-- {{#if ../isAdmin}} --}}
-                  {{!-- <li class="nav-item"><a class="nav-link" href="/admin-panel">Admin</a></li> --}}
-                  {{!-- {{/if}} --}}
+                  {{!-- {{#if isAdmin}}
+                  <li class="nav-item"><a class="nav-link" href="/admin-panel">Admin</a></li>
+                  {{/if}} --}}
                   {{#unless currentUser}}
                   <li class="nav-item"><a class="nav-link" href="/iniciar-sesion">Iniciar sesión</a></li>
                   <li class="nav-item"><a class="nav-link" href="/registro">Crear cuenta</a></li>
                   {{/unless}}
-                  {{!-- {{#if ../isLoggedIn}} --}}
                   {{#if currentUser}}
                   <li class="nav-item"><a class="nav-link" href="/mi-perfil">Tu perfil</a></li>
                   <li class="nav-item"><a class="nav-link" href="/cerrar-sesion">Cerrar sesión</a></li>
-                  {{!-- {{/if}} --}}
                   {{/if}}
                </ul>
             </div>
@@ -57,7 +55,7 @@
    </div>
 
    <div class="container-fluid footer logo">
-      <footer class="py-3 my-4">
+      <footer class="py-2 mt-4">
          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Inicio</a></li>
             <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Seguridad</a></li>

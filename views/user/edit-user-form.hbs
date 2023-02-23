@@ -1,33 +1,27 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            <h2>Lector, regístrate.</h2>
+            <h2>Editar perfil</h2>
             <hr>
             <form action="/registro" method="POST" enctype="multipart/form-data">
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="firstName" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" minlength="2"
-                        placeholder="Nombre">
+                        value="{{firstName}}">
                 </div>
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="lastName" class="form-label">Apellido</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" minlength="2"
-                        placeholder="Apellido">
+                        value="{{lastName}}">
                 </div>
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="username" class="form-label">Nombre de usuario</label>
                     <input type="text" class="form-control" id="username" name="username" minlength="2"
-                        placeholder="Nick">
+                        value="{{username}}">
                 </div>
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="email" class="form-label">Dirección de email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="cloob@correo.com">
-                </div>
-                <div class="mb-4">
-                    <label for="userPassword" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="userPassword" name="userPassword" minlength="6"
-                        placeholder="Contraseña">
-                    <div class="form-text helper">Mínimo 6 caracteres</div>
+                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
                 </div>
                 <div class="mb-2">
                     <label for="avatar" class="form-label">Foto de avatar</label>
@@ -35,13 +29,10 @@
                     <div class="form-text helper">Png o Jpeg</div>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-cloob">Registrarme</button>
+                    <button type="submit" class="btn btn-dark">Registrarme</button>
                 </div>
                 <br>
                 <a class="link" href="/iniciar-sesion">¿Ya tienes una cuenta? Inicia sesión.</a>
-                {{#if errorMessage}}
-                <p id="error" class="mt-2 error-msg">{{errorMessage}}</p>
-                {{/if}}
             </form>
         </div>
     </div>

@@ -1,102 +1,75 @@
 <div class="container">
 
     <div class="row">
-
         <div class="col-7">
             <img src="https://res.cloudinary.com/dle7ctrmn/image/upload/v1676995290/Cloob-cover-cropped_byrspm.png"
                 alt="Cloob Cover" class="cover-img">
         </div>
-
         <div class="col-5">
             <h1>cloob.</h1>
-            <h2>Encuentra tu comunidad de lectores favorita.</h2>
-            <p>
-                Únete a uno de los cientos de clubs de lectura moderados por autores, lectores y amantes de las letras.
-            </p>
+            <h3 class="ms-2">Encuentra tu comunidad de lectores favorita.</h3>
+            <p class="ms-2">Únete a uno de los cientos de clubs de lectura moderados por autores, lectores y amantes
+                de las letras.</p>
             {{#unless currentUser}}
-            <a href="/registro" class="btn btn-cloob">Crear cuenta</a>
+            <a href="/registro" class="btn btn-cloob ms-2 d-grid">Crear cuenta</a>
             {{/unless}}
             {{#if currentUser}}
-            <a href="/cloob/lista" class="btn btn-cloob">Ver cloobs</a>
+            <a href="/cloob/lista" class="btn btn-cloob ms-2 d-grid">Ver cloobs</a>
             {{/if}}
         </div>
-
     </div>
 
-    <hr>
-
     <div class="row">
-
-        <div>
-            <h2>Clubs de lectura más recientes.</h2>
-
+        <div class="mb-2">
+            <h3>Clubs de lectura más recientes.</h3>
         </div>
-
         {{#each recentCloobs}}
-
-        <div class="col-md-3">
-
-            <div class="card mb-4 cloobs" style="width: 18rem;">
-                <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+        <div class="col-3">
+            <div class="card mb-2 card-cloob">
+                <div class="ratio ratio-1x1">
+                    <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                </div>
                 <div class="card-body">
-
-                    <h5 class="card-title">{{name}}</h5>
+                    <h4 class="card-title">{{name}}</h4>
                     <p class="card-text">{{description}}</p>
                     <hr>
-                    <p class="card-text">Organizado por {{host.firstName}} {{host.lastName}}</p>
-                    <hr>
-
-                    {{#if ...isAdmin}}
-
-                    <form action="/cloob/eliminar/{{_id}}" method="POST">
-                        <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
-                    </form>
-                    <br>
-
-                    {{/if}}
-
-                    <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
-
+                    <p class="card-text"><b>Host:</b> {{host.firstName}} {{host.lastName}}</b></p>
+                    <div class="d-grid">
+                        {{#if ...isAdmin}}
+                        <form action="/cloob/eliminar/{{_id}}" method="POST">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                        </form>
+                        {{/if}}
+                        <a href="/cloob/detalles/{{_id}}" class="btn btn-cloob2 btn-sm">Ver Cloob</a>
+                    </div>
                 </div>
             </div>
-
         </div>
-
         {{/each}}
-
     </div>
 
-    <hr>
-
     <div class="row">
-
-        <div>
-            <h2>Clubs de lectura más populares.</h2>
-
+        <div class="mb-2">
+            <h3>Clubs de lectura más populares.</h3>
         </div>
-
         {{#each popularCloobs}}
-
-        <div class="col-md-3">
-
-            <div class="card mb-4 cloobs" style="width: 18rem;">
-                <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+        <div class="col-3">
+            <div class="card mb-2 card-cloob">
+                <div class="ratio ratio-1x1">
+                    <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                </div>
                 <div class="card-body">
-
-                    <h5 class="card-title">{{name}}</h5>
+                    <h4 class="card-title">{{name}}</h4>
                     <p class="card-text">{{description}}</p>
+                    <p class="card-text"><b>Host:</b> {{host.firstName}} {{host.lastName}}</p>
                     <hr>
-                    <p class="card-text">Organizado por {{host.firstName}} {{host.lastName}}</p>
-                    <hr>
-                    <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
-
+                    <div class="d-grid">
+                        <a href="/cloob/detalles/{{_id}}" class="btn btn-cloob2 btn-sm">Ver Cloob</a>
+                    </div>
                 </div>
             </div>
-
         </div>
-
         {{/each}}
-
     </div>
 
 </div>

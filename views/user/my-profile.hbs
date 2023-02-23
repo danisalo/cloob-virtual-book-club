@@ -1,34 +1,55 @@
 <div class="container">
     <div class="row">
-        <h3>Mi perfil - {{currentUser.firstName}} {{currentUser.lastName}}</h3>
-        <div>
-            <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
-                class="profile-picture">
+        <div class="mb-4">
+            <h3>Mi perfil - {{currentUser.firstName}} {{currentUser.lastName}}</h3>
+            <div>
+                <img src="{{currentUser.avatar}}" alt="Avatar de {{currentUser.firstName}} {{currentUser.lastName}}"
+                    class="profile-picture">
+            </div>
+            <a href="/user/editar" class="btn btn-cloob btn-sm">Editar</a>
         </div>
     </div>
 
     <div class="row">
-        <h2>Mis amigues</h2>
+        <div class="mb-2">
+            <h3>Siguiendo</h3>
+        </div>
         {{#each myFriends}}
-        <div class="card-friend text-center mb-3">
-            <div class="card-body">
-                <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
-                <h4>{{firstName}} {{lastName}}</h4>
-                <a href="/perfil/{{_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
-            </div>
+        {{!-- <div class="col-8"> --}}
+            <div class="card mb-2 card-friend text-center me-2">
+                <div class="card-body">
+                    <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
+                    <h4>{{firstName}} {{lastName}}</h4>
+                    <a href="/perfil/{{_id}}" class="btn btn-cloob2 btn-sm">Ver perfil</a>
+                </div>
+                {{!--
+            </div> --}}
         </div>
         {{/each}}
     </div>
 
     <div class="row">
-        <h2>Mis Cloobs</h2>
+        <div class="mb-2">
+            <h3>Mis Cloobs</h3>
+        </div>
         {{#each myCloobs}}
-        <div class="card-cloob">
-            <img src="{{cover}}" class="card-img-top" alt="{{name}}">
-            <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
-                <p class="card-text">{{description}}</p>
-                <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
+        <div class="col-3">
+            <div class="card mb-2 card-cloob">
+                <div class="ratio ratio-1x1">
+                    <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text">{{description}}</p>
+                    <div class="d-grid">
+                        {{#if ...isAdmin}}
+                        <form action="/cloob/eliminar/{{_id}}" method="POST">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                        </form>
+                        {{/if}}
+                        <a href="/cloob/detalles/{{_id}}" class="btn btn-cloob2 btn-sm">Ver Cloob</a>
+                    </div>
+                </div>
             </div>
         </div>
         {{/each}}

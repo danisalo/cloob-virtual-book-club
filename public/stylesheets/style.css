@@ -171,3 +171,8 @@ h5 {
   margin-top: 0.5em;
   color: var(--cloob-yellow);
 }
+
+.five-lines {
+  max-height: calc(1.5em * 4);
+  overflow: hidden;
+}

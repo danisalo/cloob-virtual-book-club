@@ -5,11 +5,9 @@ const eventSchema = new Schema(
         date: {
             type: Date,
             unique: true,
-            required: true,
         },
-        book: {
+        bookId: {
             type: String,
-            required: true
         },
         participants: [{
             ref: 'User',

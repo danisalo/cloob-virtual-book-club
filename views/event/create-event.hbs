@@ -1,15 +1,30 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-8">
             <h2>Crear nuevo evento</h2>
             <hr>
             <h3>Terminar ficha</h3>
             <hr>
-            <form action="/evento/crear-evento" method="GET">
+            <form action="/evento/{{cloob_id}}/crear-evento" method="POST">
                 <div class="mb-3">
-                    <p>Este es el id del libro que escogiste: {{ book_id }}</p>
+                    <img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}">
+                    <h2>Libro: {{book.volumeInfo.title}}</h2>
+                    <p>Autor/a: {{book.volumeInfo.authors}}</p>
                 </div>
+                <div class="mb-3">
+                    <label for="date">Seleccionar día:</label>
+                    <input type="datetime-local" id="currentDateTime" name="date" min="currentDateTime">
+                </div>
+
+                <input type="hidden" name="bookId" id="bookId" value="{{bookId}}">
+
+                <button type="submit" class="btn btn-dark">Crear evento</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    const now = new Date().toISOString().slice(0, 16)
+    document.getElementById('currentDateTime').value = now
+</script>

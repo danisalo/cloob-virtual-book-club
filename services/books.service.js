@@ -10,6 +10,10 @@ class ApiServiceBooks {
     searchBooks(query) {
         return this.api.get(`/volumes?q=${query}`).then(({ data }) => data)
     }
+
+    getBookById(id) {
+        return this.api.get(`/volumes/${id}`).then(({ data }) => data)
+    }
 }
 
 module.exports = ApiServiceBooks

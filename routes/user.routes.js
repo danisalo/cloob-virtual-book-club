@@ -36,7 +36,6 @@ router.get("/mi-perfil", (req, res, next) => {
 router.get("/perfil/:user_id", (req, res, next) => {
 
     const { user_id } = req.params
-    console.log('este es el console log', req.params)
     User
         .findById(user_id)
         .populate({

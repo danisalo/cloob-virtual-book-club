@@ -91,9 +91,12 @@ router.get('/detalles/:cloob_id', isLoggedIn, (req, res, next) => {
         .populate({
             path: 'host'
         })
-        .then(cloob => res.render('cloob/cloob-details', { // ESTO ESTA ROMPIENDO TODO
+        .populate({
+            path: 'events'
+        })
+        .then(cloob => res.render('cloob/cloob-details', {
             cloob,
-            isAdmin: req.session.currentUser?.role === 'ADMIN',
+            isAdmin: req.session.currentUser?.role === 'ADMIN', // ESTO ESTA ROMPIENDO TODO
         }))
         .catch(err => next(err))
 })

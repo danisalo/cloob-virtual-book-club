@@ -49,15 +49,14 @@
     <div>
         <div class="row">
             <h2>Eventos</h2>
-            {{!-- {{#each cloob.events}} --}}
+            {{#each cloob.events}}
             <div class="card mb-4 cloobs" style="width: 18rem;">
                 <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
                 <div class="card-body">
-                    <h5 class="card-title">Book name</h5>
-                    <p class="card-text">Date of event</p>
+                    <h5 class="card-title">Evento</h5>
+                    <p class="card-text">Date: {{date}}</p>
                     <hr>
                     <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver evento</a>
-                    <p class="card-text">Num participants</p>
                     {{#if ...isAdmin}}
                     <form action="/cloob/eliminar/{{_id}}" method="POST">
                         <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
@@ -66,14 +65,14 @@
 
                 </div>
             </div>
-            {{!-- {{/each}} --}}
+            {{/each}}
 
         </div>
     </div>
 
     <div class="row">
         {{!-- {{#if isAdmin}} --}}
-        <a href="/evento/buscar-libro" class="btn btn-warning btn-sm">Crear Evento</a>
+        <a href="/evento/{{cloob.id}}/buscar-libro" class="btn btn-warning btn-sm">Crear Evento</a>
 
         <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
         {{!-- {{/if}} --}}

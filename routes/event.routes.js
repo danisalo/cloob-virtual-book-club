@@ -71,4 +71,30 @@ router.post('/:cloob_id/crear-evento', (req, res, next) => {
         .catch(err => next(err))
 })
 
+
+router.get('/:cloob_id/detalles/:event_id', isLoggedIn, (req, res, next) => {
+
+    const { cloob_id } = req.params
+    const { event_id } = req.params
+
+    Event
+        .findById(event_id)
+        .populate({
+            path: 'participants'
+        })
+        .populate({
+            path: 'host'
+        })
+        .populate({
+            path: 'events'
+        })
+        .then(event => res.render('event/event-details', {
+            event,
+            isAdmin: req.session.currentUser?.role === 'ADMIN'
+        }))
+        .catch(err => next(err))
+})
+
+
+
 module.exports = router

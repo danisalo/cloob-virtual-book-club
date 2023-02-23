@@ -55,7 +55,7 @@ router.get("/perfil/:user_id", (req, res, next) => {
 
 
 // Add to My Friends
-router.post('/agregar/:user_id', isLoggedIn, (req, res, next) => {
+router.post('/agregar/:user_id', (req, res, next) => {
 
     const { user_id } = req.params
     const currentUser_id = req.session.currentUser?._id
@@ -79,15 +79,16 @@ router.get('/user/editar', (req, res, next) => {
 
 
 // Edit User form handler
-router.post('/user/editar', (req, res) => {
+router.post('/user/editar', uploader.single('avatar'), (req, res, next) => {
 
     const { firstName, lastName, username, email, user_id } = req.body
     const { path: avatar } = req.file
+    // const { _id: currentUserID } = req.session.currentUser
 
     User
         .findByIdAndUpdate(user_id, { firstName, lastName, username, email, avatar })
-        .then(() => res.redirect('/mi-perfil'))
-        .catch(err => console.log(err))
+        .then(() => res.redirect("/mi-perfil"))
+        .catch(err => next(err))
 })
 
 

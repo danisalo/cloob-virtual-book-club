@@ -96,7 +96,7 @@ router.get('/detalles/:cloob_id', isLoggedIn, (req, res, next) => {
         })
         .then(cloob => res.render('cloob/cloob-details', {
             cloob,
-            isAdmin: req.session.currentUser?.role === 'ADMIN', // ESTO ESTA ROMPIENDO TODO
+            isAdmin: req.session.currentUser?.role === 'ADMIN'
         }))
         .catch(err => next(err))
 })
@@ -115,19 +115,20 @@ router.get('/editar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'HOST'), (req, re
 
 
 // Edit Cloob form handler
-router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res) => {
+router.post('/editar', isLoggedIn, checkRole('ADMIN', 'EDITOR'), uploader.single('cover'), (req, res, next) => {
 
-    const { name, description, maxParticipants, cover, cloob_id } = req.body
+    const { name, description, maxParticipants, cloob_id } = req.body
+    const { path: cover } = req.file
 
     Cloob
         .findByIdAndUpdate(cloob_id, { name, description, maxParticipants, cover })
-        .then(cloob => res.redirect(`/cloob/${cloob._id}`))
-        .catch(err => console.log(err))
+        .then(() => res.redirect(`/cloob/detalles/${cloob_id}`))
+        .catch(err => next(err))
 })
 
 
 // Delete Cloob
-router.post('/eliminar/:cloob_id', isLoggedIn, (req, res, next) => {
+router.post('/eliminar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res, next) => {
 
     const { cloob_id } = req.params
 
@@ -136,6 +137,7 @@ router.post('/eliminar/:cloob_id', isLoggedIn, (req, res, next) => {
         .then(() => res.redirect('/cloob/lista'))
         .catch(err => next(err))
 })
+
 
 
 module.exports = router

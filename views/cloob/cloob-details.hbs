@@ -71,10 +71,17 @@
     </div>
 
     <div class="row">
-        {{!-- {{#if isAdmin}} --}}
-        <a href="/evento/{{cloob.id}}/buscar-libro" class="btn btn-warning btn-sm">Crear Evento</a>
+        {{!-- {{#if isHost}} --}}
+        <a href="/evento/{{cloob.id}}/buscar-libro" class="btn btn-cloob">Crear Evento</a>
 
-        <a href="/cloob/editar/{{_id}}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="/cloob/editar/{{cloob.id}}" class="btn btn-cloob">Editar</a>
         {{!-- {{/if}} --}}
+        {{#if isAdmin}}
+
+        <form action="/cloob/eliminar/{{cloob.id}}" method="POST">
+            <input type="submit" value="Eliminar" class="btn btn-danger mt-3">
+        </form>
+
+        {{/if}}
     </div>
 </div>

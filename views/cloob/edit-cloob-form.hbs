@@ -1,0 +1,51 @@
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <h3>Edición del cloob</h3>
+            <hr>
+            <h2>{{name}}</h2>
+            <hr>
+
+            <form action="/cloob/editar" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre del cloob.</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{name}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="description" name="description" value="{{description}}">
+                </div>
+
+                {{!-- <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea type="text" cols="30" rows="5" class="form-control" id="description" name="description"
+                        minlength="2" value="{{description}}"></textarea>
+                </div> --}}
+
+                <div class="mb-3">
+                    <label for="maxParticipants" class="form-label">Número máximo de integrantes</label>
+                    <input type="number" class="form-control" id="maxParticipants" name="maxParticipants"
+                        value="{{maxParticipants}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="cover" class="form-label">Imagen del Cloob</label>
+                    <input type="file" class="form-control" id="cover" name="cover">
+                </div>
+
+                <input type="hidden" name="host" value="{{host}}">
+
+                <input type="hidden" name="cloob_id" value="{{_id}}">
+
+                <div class="d-grid mt-5">
+                    <button type="submit" class="btn btn-cloob btn-lg">Guardar edición</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

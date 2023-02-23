@@ -1,31 +1,40 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>Crea un nuevo Cloob</h1>
+
+            <h1>Crea un cloob.</h1>
             <hr>
+
             <form action="/cloob/crear" method="POST" enctype="multipart/form-data">
+
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre del Cloob</label>
                     <input type="text" class="form-control" id="name" name="name" minlength="2">
                 </div>
+
                 <div class="mb-3">
                     <label for="description" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="description" name="description" minlength="2">
-                    <div class="form-text">Describe las motivaciones de tu club de lectura</div>
+                    <textarea type="text" cols="30" rows="5" class="form-control" id="description" name="description"
+                        minlength="2" placeholder="Describe las motivaciones de tu club de lectura"></textarea>
                 </div>
+
                 <div class="mb-3">
                     <label for="maxParticipants" class="form-label">Número máximo de participantes</label>
                     <input type="number" class="form-control" id="maxParticipants" name="maxParticipants">
                 </div>
+
                 <div class="mb-3">
                     <label for="cover" class="form-label">Imagen del Cloob</label>
                     <input type="file" class="form-control" id="cover" name="cover">
                     <div class="form-text">Png o Jpeg</div>
                 </div>
+
                 <div class="d-grid">
                     <button type="submit" class="btn btn-dark">Crear Cloob</button>
                 </div>
+
             </form>
+
         </div>
     </div>
 </div>

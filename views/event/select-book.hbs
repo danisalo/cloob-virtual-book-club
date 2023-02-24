@@ -1,18 +1,20 @@
 <div class="container">
     <div class="row justify-content-center">
-        <h2>Crear nuevo evento</h2>
-        <hr>
-        <h3>Seleccionar libro</h3>
-        <hr>
-        <div class="row">
-            {{#each books }}
-            <div class="card cloobs col-8 col-md-3 m-2 mb-4">
-                <img src="{{volumeInfo.imageLinks.smallThumbnail}}" alt="{{volumeInfo.title}}">
-                <p>{{volumeInfo.title}}</p>
-                <p>{{volumeInfo.authors}}</p>
-                <a href="/evento/{{../cloob_id}}/crear-evento/{{id}}" class="btn btn-dark">Seleccionar</a>
+        <div class="col-8">
+            <h3>Crear nuevo evento</h3>
+            <hr>
+            <h2>Seleccionar libro</h2>
+            <div class="row justify-content-center">
+                {{#each books }}
+                <div class="card card-cloob col-3 m-2 pb-2">
+                    <img src="{{volumeInfo.imageLinks.smallThumbnail}}" alt="{{volumeInfo.title}}"
+                        class="mb-2 book-preview">
+                    <h6 class="card-cloob">{{volumeInfo.title}}</h6>
+                    <p>{{volumeInfo.authors}}</p>
+                    <a href="/evento/{{../cloob_id}}/crear-evento/{{id}}" class="btn btn-cloob">Seleccionar</a>
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
     </div>
 </div>

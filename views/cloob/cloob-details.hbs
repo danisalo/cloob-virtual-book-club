@@ -1,16 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <h2>{{cloob.name}}</h2>
+            <h3>{{cloob.name}}</h3>
             <img class="card-img-top" src="{{cloob.cover}}" alt="Imagen del Cloob {{cloob.name}}">
             <form action="/cloob/agregar/{{cloob._id}}" method="POST">
-                <input type="submit" value="Unirse" class="btn btn-dark btn-sm">
+                <div class="d-grid">
+                    <input type="submit" value="Unirse" class="btn btn-cloob btn-sm">
+                </div>
             </form>
         </div>
 
         <div class="col-8">
-            <h3>Moderado por:</h3>
-            <h2>{{cloob.host.firstName}} {{cloob.host.lastName}}</h2>
+            <h3>Moderado por: {{cloob.host.firstName}} {{cloob.host.lastName}}</h3>
             <div class="row">
                 <div class="col-4">
                     <div class="card-friend text-center mb-3">
@@ -18,7 +19,7 @@
                             <img src="{{cloob.host.avatar}}"
                                 alt="Avatar de {{cloob.host.firstName}} {{cloob.host.lastName}}"
                                 class="profile-picture">
-                            <a href="/perfil/{{cloob.host._id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                            <a href="/perfil/{{cloob.host._id}}" class="btn btn-cloob btn-sm">Ver perfil</a>
                         </div>
                     </div>
                 </div>
@@ -32,13 +33,13 @@
     <br>
     <div>
         <div class="row">
-            <h2>Integrantes:</h2>
+            <h3>Integrantes:</h3>
             {{#each cloob.participants}}
             <div class="card-friend text-center mb-3">
                 <div class="card-body">
                     <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
                     <h4>{{firstName}} {{lastName}}</h4>
-                    <a href="/perfil/{{_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                    <a href="/perfil/{{_id}}" class="btn btn-cloob btn-sm">Ver perfil</a>
                 </div>
             </div>
             {{/each}}
@@ -49,20 +50,22 @@
     <br>
     <div>
         <div class="row">
-            <h2>Eventos:</h2>
+            <h3>Eventos:</h3>
             {{#each cloob.events}}
-            <div class="card mb-4 cloobs" style="width: 18rem;">
+            <div class="card mb-4 card-cloob" style="width: 18rem;">
                 <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
                 <div class="card-body">
                     <h5 class="card-title">Evento</h5>
                     <p class="card-text">Date: {{date}}</p>
                     <hr>
-                    <a href="/evento/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver evento</a>
-                    {{#if ...isAdmin}}
-                    <form action="/evento/eliminar/{{_id}}" method="POST">
-                        <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
-                    </form>
-                    {{/if}}
+                    <div class="d-grid">
+                        <a href="/evento/detalles/{{_id}}" class="btn btn-cloob2 btn-sm">Ver evento</a>
+                        {{#if ...isAdmin}}
+                        <form action="/evento/eliminar/{{_id}}" method="POST">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                        </form>
+                        {{/if}}
+                    </div>
 
                 </div>
             </div>
@@ -72,10 +75,10 @@
     </div>
 
     <div class="row">
-        {{#if isHost}}
+        {{!-- {{#if isHost}} --}}
         <a href="/evento/{{cloob.id}}/buscar-libro" class="btn btn-cloob">Crear Evento</a>
-        <a href="/cloob/editar/{{cloob.id}}" class="btn btn-cloob">Editar</a>
-        {{/if}}
+        <a href="/cloob/editar/{{cloob.id}}" class="btn btn-cloob">Editar Cloob</a>
+        {{!-- {{/if}} --}}
         {{#if isAdmin}}
         <form action="/cloob/eliminar/{{cloob.id}}" method="POST">
             <input type="submit" value="Eliminar" class="btn btn-danger mt-3">

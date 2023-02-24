@@ -1,24 +1,24 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            <h2>Crear nuevo evento</h2>
+            <h3>Crear nuevo evento</h3>
             <hr>
-            <h3>Terminar ficha</h3>
-            <hr>
+            <h2>Detalles finales</h2>
             <form action="/evento/{{cloob_id}}/crear-evento" method="POST">
-                <div class="mb-3">
-                    <img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}">
-                    <h2>Libro: {{book.volumeInfo.title}}</h2>
-                    <p>Autor/a: {{book.volumeInfo.authors}}</p>
+                <div class="mb-2">
+                    <img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}"
+                        class="book-preview">
+                    <h4>Libro: {{book.volumeInfo.title}}</h4>
+                    <p><b>Autor/a:</b> {{book.volumeInfo.authors}}</p>
                 </div>
-                <div class="mb-3">
-                    <label for="date">Seleccionar día:</label>
+                <div class="mb-2">
+                    <label for="date"><b>Seleccionar día:</b></label>
                     <input type="datetime-local" id="currentDateTime" name="date" min="currentDateTime">
                 </div>
 
                 <input type="hidden" name="bookId" id="bookId" value="{{bookId}}">
 
-                <button type="submit" class="btn btn-dark">Crear evento</button>
+                <button type="submit" class="btn btn-cloob">Crear evento</button>
             </form>
         </div>
     </div>

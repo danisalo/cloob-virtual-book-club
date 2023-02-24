@@ -8,9 +8,14 @@
                 <div class="mb-2">
                     <img src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}"
                         class="book-preview">
-                    <h4>Libro: {{book.volumeInfo.title}}</h4>
-                    <p><b>Autor/a:</b> {{book.volumeInfo.authors}}</p>
+                    <h4>{{book.volumeInfo.title}}</h4>
+                    <br>
+                    <br>
+                    <p>Escrito por:</p>
+                    <h6>{{book.volumeInfo.authors}}</h6>
                 </div>
+                <br>
+                <br>
                 <div class="mb-2">
                     <label for="date"><b>Seleccionar día:</b></label>
                     <input type="datetime-local" id="currentDateTime" name="date" min="currentDateTime">

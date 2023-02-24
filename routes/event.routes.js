@@ -83,6 +83,8 @@ router.get('/detalles/:event_id', isLoggedIn, (req, res, next) => {
             path: 'participants bookId'
         })
         .then(event => {
+            event._doc.date = event._doc.date.toDateString()
+
             bookApi.getBookById(event.bookId)
                 .then(book => res.render('event/event-details', {
                     book,

@@ -8,6 +8,10 @@ const User = require('./../models/User.model')
 const Comment = require('./../models/Comment.model')
 const uploader = require('../config/uploader.config')
 
+// API
+const ApiServiceBooks = require('../services/books.service')
+const bookApi = new ApiServiceBooks()
+
 // Middlewares
 const { currentUser, isLoggedIn, isLoggedOut, checkRole } = require('../middlewares/route-guard')
 
@@ -83,15 +87,34 @@ router.get('/detalles/:cloob_id', isLoggedIn, (req, res, next) => {
 
     const { cloob_id } = req.params
 
+    let klu = []
+
     Cloob
         .findById(cloob_id)
         .populate({
             path: 'participants host events'
         })
-        .then(cloob => res.render('cloob/cloob-details', {
-            cloob,
-            isAdmin: req.session.currentUser?.role === 'ADMIN'
-        }))
+        .then(cloob => {
+            klu = cloob
+            const promises = cloob.events.map(({ bookId }) => bookApi.getBookById(bookId))
+            return Promise.all(promises)
+
+
+
+        })
+        .then(values => {
+            const images = values.map(({ volumeInfo }) => volumeInfo.imageLinks.thumbnail)
+
+            klu._doc.events = klu.events.map((event, index) => {
+                const { _doc } = event
+                return ({ ..._doc, bookId: images[index], date: _doc.date.toDateString() })
+            })
+
+            res.render('cloob/cloob-details', {
+                cloob: klu,
+                isAdmin: req.session.currentUser?.role === 'ADMIN'
+            })
+        })
         .catch(err => next(err))
 })
 

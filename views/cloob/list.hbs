@@ -1,49 +1,54 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <h3>cloobs.</h3>
-            <h2>Todos los clubs de lectura a un click de distancia.</h2>
-            <hr>
-            <div class="row">
-                {{#each cloobs}}
-                <div class="col-4">
-                    <div class="card mb-4 cloobs card-cloob" style="width: 18rem;">
-                        <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{name}}</h5>
-                            <p class="card-text five-lines">{{description}}</p>
-                            <hr>
-                            <p class="card-text"><b>host:</b> {{host.firstName}} {{host.lastName}}</p>
-                            <hr>
-                            <a href="/cloob/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver Cloob</a>
-                            {{#if ...isAdmin}}
-                            <form action="/cloob/eliminar/{{_id}}" method="POST">
-                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
-                            </form>
-                            {{/if}}
-                        </div>
+
+    <div class="row">
+        <div class="mb-2">
+            <h3>Todos los clubs de lectura a un click de distancia.</h3>
+        </div>
+        {{#each cloobs}}
+        <div class="col-3">
+            <div class="card mb-2 card-cloob">
+                <div class="ratio ratio-1x1">
+                    <img class="card-img-top" src="{{cover}}" alt="Imagen del Cloob {{name}}">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{name}}</h4>
+                    <p class="card-text five-lines">{{description}}</p>
+                    <hr>
+                    <p class="card-text"><b>Host:</b> {{host.firstName}} {{host.lastName}}</b></p>
+                    <div class="d-grid">
+                        {{#if ...isAdmin}}
+                        <form action="/cloob/eliminar/{{_id}}" method="POST">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                        </form>
+                        {{/if}}
+                        <a href="/cloob/detalles/{{_id}}" class="btn btn-cloob2 btn-sm">Ver Cloob</a>
                     </div>
                 </div>
-                {{/each}}
-
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4 cloobs" style="width: 18rem;">
-                        <img class="card-img-top"
-                            src="https://res.cloudinary.com/dle7ctrmn/image/upload/v1676993838/dn8a0drueeclckzhzchr.png"
-                            alt="Imagen del Cloob {{name}}">
-                        <div class="card-body card-cloob">
-                            <h5 class="card-title">CREA UN NUEVO CLUB</h5>
-                            <hr>
-                            <p>Conviértete en responsable de un club de lectura.</p>
-                            <hr>
-                            <a href="/cloob/crear" class="btn btn-warning btn-sm">Crear Cloob</a>
-                        </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 cloobs" style="width: 18rem;">
+                <img class="card-img-top"
+                    src="https://res.cloudinary.com/dle7ctrmn/image/upload/v1676993838/dn8a0drueeclckzhzchr.png"
+                    alt="Imagen del Cloob {{name}}">
+                <div class="card-body card-cloob">
+                    <h5 class="card-title">CREA UN NUEVO CLUB</h5>
+                    <hr>
+                    <p>Conviértete en responsable de un club de lectura.</p>
+                    <hr>
+                    <div class="d-grid">
+                        <a href="/cloob/crear" class="btn btn-cloob btn-sm">Crear Cloob</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>

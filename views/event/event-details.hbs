@@ -19,7 +19,7 @@
                             <img src="{{cloob.host.avatar}}"
                                 alt="Avatar de {{cloob.host.firstName}} {{cloob.host.lastName}}"
                                 class="profile-picture">
-                            <a href="/perfil/{{cloob.host._id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                            <a href="/perfil/{{cloob.host._id}}" class="btn btn-cloob btn-sm">Ver perfil</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <img src="{{avatar}}" alt="Avatar de {{firstName}} {{lastName}}" class="profile-picture">
                     <h4>{{firstName}} {{lastName}}</h4>
-                    <a href="/perfil/{{_id}}" class="btn btn-dark btn-sm">Ver perfil</a>
+                    <a href="/perfil/{{_id}}" class="btn btn-cloob btn-sm">Ver perfil</a>
                 </div>
             </div>
             {{/each}}
@@ -58,7 +58,7 @@
                     <h5 class="card-title">Evento</h5>
                     <p class="card-text">Date: {{date}}</p>
                     <hr>
-                    <a href="/evento/detalles/{{_id}}" class="btn btn-dark btn-sm">Ver evento</a>
+                    <a href="/evento/detalles/{{_id}}" class="btn btn-cloob btn-sm">Ver evento</a>
                     {{#if ...isAdmin}}
                     <form action="/evento/eliminar/{{_id}}" method="POST">
                         <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">

@@ -66,6 +66,18 @@ img {
   margin-bottom: 1em;
 }
 
+.book-preview {
+  max-height: 200px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.five-lines {
+  min-height: calc(1.5em * 4);
+  max-height: calc(1.5em * 4);
+  overflow: hidden;
+}
+
 /* Typography */
 
 .logo {
@@ -169,9 +181,4 @@ h5 {
 .helper {
   margin-top: 0.5em;
   color: var(--cloob-yellow);
-}
-
-.five-lines {
-  max-height: calc(1.5em * 4);
-  overflow: hidden;
 }

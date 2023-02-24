@@ -96,5 +96,32 @@ router.get('/detalles/:event_id', isLoggedIn, (req, res, next) => {
 })
 
 
+router.post('/agregar/:event_id', isLoggedIn, (req, res, next) => {
+
+    const { event_id } = req.params
+    const user_id = req.session.currentUser?._id
+
+    Event
+        .findByIdAndUpdate(event_id, { $addToSet: { participants: user_id } }, { new: true })
+        .then(() => {
+            return User
+                .findByIdAndUpdate(user_id, { $addToSet: { myEvents: event_id } }, { new: true })
+        })
+        .then(() => res.redirect("back"))
+        .catch(err => next(err))
+})
+
+
+router.post('/eliminar/:event_id', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (req, res, next) => {
+
+    const { event_id } = req.params
+
+    Event
+        .findByIdAndDelete(event_id)
+        .then(() => res.redirect('/cloob/lista'))
+        .catch(err => next(err))
+})
+
+
 
 module.exports = router

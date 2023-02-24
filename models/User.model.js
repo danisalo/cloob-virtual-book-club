@@ -44,6 +44,10 @@ const userSchema = new Schema(
       ref: 'Cloob',
       type: Schema.Types.ObjectId
     }],
+    myEvents: [{
+      ref: 'Event',
+      type: Schema.Types.ObjectId
+    }],
     role: {
       type: String,
       enum: ['USER', 'ADMIN'],

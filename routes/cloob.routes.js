@@ -128,7 +128,7 @@ router.post('/eliminar/:cloob_id', isLoggedIn, checkRole('ADMIN', 'EDITOR'), (re
 
     Cloob
         .findByIdAndDelete(cloob_id)
-        .then(() => res.redirect('/cloob/lista'))
+        .then(() => res.redirect("back"))
         .catch(err => next(err))
 })
 
